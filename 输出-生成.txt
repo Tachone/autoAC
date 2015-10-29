@@ -1,0 +1,9 @@
+﻿1>------ 已启动生成:  项目: Auto AC, 配置: Debug Win32 ------
+1>  main.cpp
+1>f:\c++\project\auto ac\auto ac\main.cpp(191): warning C4018: “<”: 有符号/无符号不匹配
+1>f:\c++\project\auto ac\auto ac\main.cpp(213): warning C4018: “<”: 有符号/无符号不匹配
+1>f:\c++\project\auto ac\auto ac\main.cpp(278): warning C4018: “<”: 有符号/无符号不匹配
+1>f:\c++\project\auto ac\auto ac\main.cpp(281): warning C4554: “&”: 检查运算符优先级可能存在的错误；使用圆括号阐明优先级
+1>f:\c++\project\auto ac\auto ac\main.cpp(486): warning C4018: “<”: 有符号/无符号不匹配
+1>  Auto AC.vcxproj -> F:\c++\project\Auto AC\Debug\Auto AC.exe
+========== 生成:  成功 1 个，失败 0 个，最新 0 个，跳过 0 个 ==========
