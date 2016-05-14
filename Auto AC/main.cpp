@@ -1,6 +1,6 @@
 #include "Htmlparse.h"
 #include "Socket.h"
-#include "SQLink.h"
+#include "SQLink.h" 
 vector <string> blogUrl;
 string allHtml;
 string CodeHtml;
@@ -18,9 +18,9 @@ string StateTime;
 int main()
 {
 	
-	SQLinkInit();  //Á¬½ÓÊı¾İ¿â
+	SQLinkInit();  //è¿æ¥æ•°æ®åº“
 
-	for (ProblemID = 1000; ProblemID < 5508; ProblemID++) //°´ÌâºÅ¿ªÊ¼Ë¢Ìâ
+	for (ProblemID = 1000; ProblemID < 5508; ProblemID++) //æŒ‰é¢˜å·å¼€å§‹åˆ·é¢˜
 	{
 		strcpy(host, "www.haosou.com");
 		strcpy(othPath, "/s?ie=utf-8&shb=1&src=360sou_newhome&q=hdu+");
@@ -39,18 +39,18 @@ int main()
 			allHtml += buf;
 		}
 		closesocket(sock);
-		regexGetcom(allHtml);  //ÌáÈ¡²©¿ÍÍøÖ·
+		regexGetcom(allHtml);  //æå–åšå®¢ç½‘å€
 
 		for (int i = 0; i < min(blogUrl.size(),3); i++)
 		{
-			InsertProb(i);    //ĞÅÏ¢²åÈëÊı¾İ¿â
+			InsertProb(i);    //ä¿¡æ¯æ’å…¥æ•°æ®åº“
 			cout << blogUrl[i] << endl;
 
 			char tmp[400];
-			strcpy(tmp, blogUrl[i].c_str());  ///////ÕâÀï²»ÄÜ¸Ä³Éi£¿£¿£¿£¿£¿
+			strcpy(tmp, blogUrl[i].c_str());  ///////è¿™é‡Œä¸èƒ½æ”¹æˆiï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿ
 			if (analyUrl(tmp) == false)
 			{
-				cout << "analyUrlº¯Êı´íÎó£¡" << endl;
+				cout << "analyUrlå‡½æ•°é”™è¯¯ï¼" << endl;
 				return 0;
 			}
 			SendRequst(host, othPath);
@@ -65,7 +65,7 @@ int main()
 			GetCode(allHtml);
 
 			CodeHtml = ReplaceDiv(CodeHtml);
-			char  *p=U2G(CodeHtml.c_str()); //´¦Àíºº×Ö£¬UTF-8±àÂë×ªÎªGB
+			char  *p=U2G(CodeHtml.c_str()); //å¤„ç†æ±‰å­—ï¼ŒUTF-8ç¼–ç è½¬ä¸ºGB
 
 			CodeHtml = string(p);
 		   // cout << CodeHtml;
@@ -73,7 +73,7 @@ int main()
 			strcpy(tmp, "http://acm.hdu.edu.cn/submit.php?action=submit");
 			if (analyUrl(tmp) == false)
 			{
-				cout << "analyUrlº¯Êı´íÎó£¡" << endl;
+				cout << "analyUrlå‡½æ•°é”™è¯¯ï¼" << endl;
 				return 0;
 			}
 
@@ -90,13 +90,13 @@ int main()
 				cout << buf;
 			}
 
-            //ĞÂÔöÄÚÈİ
+            //æ–°å¢å†…å®¹
 			//Sleep(4000);
 			char temp[400];
-			strcpy(temp,"http://acm.hdu.edu.cn/status.php");  ///////ÕâÀï²»ÄÜ¸Ä³Éi£¿£¿£¿£¿£¿
+			strcpy(temp,"http://acm.hdu.edu.cn/status.php");  ///////è¿™é‡Œä¸èƒ½æ”¹æˆiï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿ
 			if (analyUrl(temp) == false)
 			{
-				cout << "analyUrlº¯Êı´íÎó£¡" << endl;
+				cout << "analyUrlå‡½æ•°é”™è¯¯ï¼" << endl;
 				return 0;
 			}
 			SendRequst(host, othPath);
@@ -116,7 +116,7 @@ int main()
 
 			Sleep(3000);
 			//if (StateAns=="Accepted")
-			//break;    //ÔİÊ±ĞÔÏÈÌá½»Ò»´Î
+			//break;    //æš‚æ—¶æ€§å…ˆæäº¤ä¸€æ¬¡
 			
 		}
 	}
