@@ -16,7 +16,7 @@ string StateSapce;
 string StateTime;
 
 int main()
-{
+{ 
 	
 	SQLinkInit();  //连接数据库
 
