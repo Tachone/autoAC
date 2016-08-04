@@ -1,4 +1,4 @@
-#include "Htmlparse.h"
+#include "Htmlparse.h" 
 
 _ConnectionPtr pMyConnect;
 string strqlk;
@@ -11,54 +11,54 @@ extern vector <string> blogUrl;
 
 void SQLinkInit()   
 {
-	CoInitialize(NULL);//³õÊ¼»¯Com¿â
-	pMyConnect = NULL;//ÕâÊÇ¸ö¶ÔÏóÖ¸Õë£¬¹ØÓÚ¶ÔÏóÖ¸ÕëµÄÄÚÈİ¿ÉÒÔ°Ù¶ÈÒ»ÏÂ£¬²»¹ı²»Àí½âÒ²¾ÍËãÁË
+	CoInitialize(NULL);//åˆå§‹åŒ–Comåº“
+	pMyConnect = NULL;//è¿™æ˜¯ä¸ªå¯¹è±¡æŒ‡é’ˆï¼Œå…³äºå¯¹è±¡æŒ‡é’ˆçš„å†…å®¹å¯ä»¥ç™¾åº¦ä¸€ä¸‹ï¼Œä¸è¿‡ä¸ç†è§£ä¹Ÿå°±ç®—äº†
 	HRESULT hr = pMyConnect.CreateInstance(__uuidof(Connection));
-	//½«¶ÔÏóÖ¸ÕëÊµÀı»¯
+	//å°†å¯¹è±¡æŒ‡é’ˆå®ä¾‹åŒ–
 	if (FAILED(hr))
 	{
-		cout << "_ConnectionPtr¶ÔÏóÖ¸ÕëÊµÀı»¯Ê§°Ü£¡" << endl;
+		cout << "_ConnectionPtrå¯¹è±¡æŒ‡é’ˆå®ä¾‹åŒ–å¤±è´¥ï¼" << endl;
 		return ;
 	}
 	_bstr_t strConnect = "Driver={sql server};server=Tach-PC\\SQLEXPRESS;uid=tach1;pwd=123456;database=ProblemSolved";  //SQLSERVER
-	//ÕâÊÇÁ¬½Óµ½SQL SERVERÊı¾İ¿âµÄÁ¬½Ó×Ö·û´®£¬ÆäÖĞµÄ²ÎÊıÒª×Ô¼º¸Ä
+	//è¿™æ˜¯è¿æ¥åˆ°SQL SERVERæ•°æ®åº“çš„è¿æ¥å­—ç¬¦ä¸²ï¼Œå…¶ä¸­çš„å‚æ•°è¦è‡ªå·±æ”¹
 	try{
 		pMyConnect->Open(strConnect, "", "", NULL);
-	}//Á¬½Óµ½Êı¾İ¿â£¬Òª²¶×½Òì³£
+	}//è¿æ¥åˆ°æ•°æ®åº“ï¼Œè¦æ•æ‰å¼‚å¸¸
 	catch (_com_error &e){
-		cout << "Á¬½ÓÊı¾İ¿âÒì³££¡" << endl;
+		cout << "è¿æ¥æ•°æ®åº“å¼‚å¸¸ï¼" << endl;
 		cout << e.ErrorMessage() << endl;
 	}
 
-	_RecordsetPtr m_pRecordset;//¼ÇÂ¼¼¯¶ÔÏóÖ¸Õë£¬ÓÃÀ´Ö´ĞĞSQLÓï¾ä²¢¼ÇÂ¼²éÑ¯½á¹û
+	_RecordsetPtr m_pRecordset;//è®°å½•é›†å¯¹è±¡æŒ‡é’ˆï¼Œç”¨æ¥æ‰§è¡ŒSQLè¯­å¥å¹¶è®°å½•æŸ¥è¯¢ç»“æœ
 	if (FAILED(m_pRecordset.CreateInstance(__uuidof(Recordset))))
 	{
-		cout << "¼ÇÂ¼¼¯¶ÔÏóÖ¸ÕëÊµÀı»¯Ê§°Ü£¡" << endl;
+		cout << "è®°å½•é›†å¯¹è±¡æŒ‡é’ˆå®ä¾‹åŒ–å¤±è´¥ï¼" << endl;
 		return ;
 	}
 
-	char sSql[] = "SELECT* FROM Problem";//ÕâÀï¿ÉÒÔÓÃ_variant_tµÄÀàĞÍ£¨Ò»ÖÖCOM±äÁ¿ÀàĞÍ£¬ÈçÏÂ_bstr_tÒ²ÊÇ£©
+	char sSql[] = "SELECT* FROM Problem";//è¿™é‡Œå¯ä»¥ç”¨_variant_tçš„ç±»å‹ï¼ˆä¸€ç§COMå˜é‡ç±»å‹ï¼Œå¦‚ä¸‹_bstr_tä¹Ÿæ˜¯ï¼‰
 
 	try{
 			m_pRecordset->Open((_variant_t)sSql,
 			pMyConnect.GetInterfacePtr(),
 			adOpenDynamic,
-			adLockOptimistic, adCmdText);//´ò¿ªÊı¾İ¿â£¬Ö´ĞĞSQLÓï¾ä
+			adLockOptimistic, adCmdText);//æ‰“å¼€æ•°æ®åº“ï¼Œæ‰§è¡ŒSQLè¯­å¥
 	}
 	catch (_com_error &e)
 	{
 
-		cout << "Ö´ĞĞÓï¾ä´íÎó" << endl;
+		cout << "æ‰§è¡Œè¯­å¥é”™è¯¯" << endl;
 		cout << e.ErrorMessage() << endl;
 	}
 
-	//SQLÓï¾äÖ´ĞĞÍê±Ï£¬¶ÁÈ¡²éÑ¯½á¹û
+	//SQLè¯­å¥æ‰§è¡Œå®Œæ¯•ï¼Œè¯»å–æŸ¥è¯¢ç»“æœ
 	/*try
 	{
-		m_pRecordset->MoveFirst(); //¼ÇÂ¼¼¯Ö¸ÕëÒÆ¶¯µ½²éÑ¯½á¹û¼¯µÄÇ°Ãæ
+		m_pRecordset->MoveFirst(); //è®°å½•é›†æŒ‡é’ˆç§»åŠ¨åˆ°æŸ¥è¯¢ç»“æœé›†çš„å‰é¢
 		while (m_pRecordset->EndOfFile == VARIANT_FALSE)
 		{
-			//ÕâÀï¾Í¶ÁÈ¡emp±íÖĞµÄ¹ÍÔ±µÄÃû×Ö
+			//è¿™é‡Œå°±è¯»å–empè¡¨ä¸­çš„é›‡å‘˜çš„åå­—
 			char *sName = (char*)(_bstr_t)(m_pRecordset->Fields->GetItem(_variant_t("probnum"))->Value);
 			cout << (char*)(_bstr_t)(m_pRecordset->Fields->GetItem(_variant_t("probnum"))->Value) << endl;
 			m_pRecordset->MoveNext();
@@ -66,7 +66,7 @@ void SQLinkInit()
 	}
 	catch (_com_error &e)
 	{
-		cout << "¶ÁÈ¡½á¹û´íÎó" << endl;
+		cout << "è¯»å–ç»“æœé”™è¯¯" << endl;
 		cout << e.ErrorMessage() << endl;
 	}*/
 
@@ -74,7 +74,7 @@ void SQLinkInit()
 
 void InsertProb(int i)
 {
-	//²åÈëÊı¾İ
+	//æ’å…¥æ•°æ®
 	try{
 	//pMyConnect.CreateInstance(__uuidof(Connection));
 
@@ -92,7 +92,7 @@ void InsertProb(int i)
 	}
 	catch (_com_error &e)
 	{
-		cout << "²åÈëÊı¾İ´íÎó" << endl;
+		cout << "æ’å…¥æ•°æ®é”™è¯¯" << endl;
 		cout << e.ErrorMessage() << endl;
 	}
 	
@@ -101,7 +101,7 @@ void InsertProb(int i)
 
 void InsertState(int i)
 {
-	//²åÈëÊı¾İ
+	//æ’å…¥æ•°æ®
 	try{
 
 		char kk[10];
@@ -117,7 +117,7 @@ void InsertState(int i)
 		}
 	catch (_com_error &e)
 	{
-		cout << "²åÈëÊı¾İ´íÎó" << endl;
+		cout << "æ’å…¥æ•°æ®é”™è¯¯" << endl;
 		cout << e.ErrorMessage() << endl;
 	}
 	
